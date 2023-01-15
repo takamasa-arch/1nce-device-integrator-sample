@@ -6,24 +6,20 @@ var {PythonShell} = require('python-shell');
 
 const sleep = require('./lib/sleep')
 
-while (true){
+PythonShell.run('./lib/get_dht11.py', null, function (err, result) {
+    if (err) throw err;
+    
+    console.log(result);
+    message = Buffer.from('temp:' + result[1] + ', humi:' + result[2]);
 
-    PythonShell.run('./lib/get_dht11.py', null, function (err, result) {
-        if (err) throw err;
-        
-        console.log(result);
-        message = Buffer.from('temp:' + result[1] + ', humi:' + result[2]);
-
-        client.send(message, process.env.UDP_PORT_TEST || 4445, '127.0.0.1', (err) => {
-            if (err) console.err(err);
-            client.close();
-            return 'done';
-        });
-
+    client.send(message, process.env.UDP_PORT_TEST || 4445, '127.0.0.1', (err) => {
+        if (err) console.err(err);
+        client.close();
+        return 'done';
     });
 
-    !(async ()=>{
-        await sleep(5000);
-    })()    
+});
 
-}
+!(async ()=>{
+    await sleep(5000);
+})();
