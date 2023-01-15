@@ -12,14 +12,10 @@ PythonShell.run('./lib/get_dht11.py', null, function (err, result) {
     raw_message = 'temp:' + result[1] + ', humi:' + result[2];
     message = Buffer.from(raw_message);
 
+    client.send(message, process.env.UDP_PORT_TEST || 4445, '127.0.0.1', (err) => {
+        if (err) console.err(err);
+        client.close();
+        return 'done';
+       });
+
 });
-
-console.log(raw_message);
-console.log(message);
-
-client.send(message, process.env.UDP_PORT_TEST || 4445, '127.0.0.1', (err) => {
-    if (err) console.err(err);
-    client.close();
-    return 'done';
-   });
-   
