@@ -3,6 +3,15 @@ const client = dgram.createSocket('udp4');
 let message = ''
 
 var {PythonShell} = require('python-shell');
+var sleep = require('sleep');
+
+let i =0;
+while (true){
+    i++;
+    console.log('loop!:' + i);
+    getTempHumi_value();
+    sleep.sleep(5);
+}
 
 function getTempHumi_value() {
     PythonShell.run('./lib/get_dht11.py', null, function (err, result) {
@@ -18,8 +27,4 @@ function getTempHumi_value() {
         });
 
     });
-}
-
-while (true){
-    setTimeout(getTempHumi_value, 5000);
 }
