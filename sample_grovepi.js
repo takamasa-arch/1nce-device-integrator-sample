@@ -9,6 +9,7 @@ PythonShell.run('./lib/get_dht11.py', null, function (err, result) {
  
     console.log(result);
     message = Buffer.from('temp:' + result[1] + ', humi:' + result[2]);
+    console.log(message);
 
 });
 
