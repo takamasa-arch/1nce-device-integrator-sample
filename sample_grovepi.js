@@ -1,6 +1,6 @@
 const dgram = require('dgram');
 const client = dgram.createSocket('udp4');
-const message = ''
+let message = ''
 
 var {PythonShell} = require('python-shell');
 
