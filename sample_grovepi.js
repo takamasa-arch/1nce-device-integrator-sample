@@ -1,6 +1,7 @@
 const dgram = require('dgram');
 const client = dgram.createSocket('udp4');
 let message = ''
+let raw_message = ''
 
 var {PythonShell} = require('python-shell');
 
@@ -8,8 +9,9 @@ PythonShell.run('./lib/get_dht11.py', null, function (err, result) {
     if (err) throw err;
  
     console.log(result);
-    message = Buffer.from('temp:' + result[1] + ', humi:' + result[2]);
-    console.log(message);
+    raw_message = 'temp:' + result[1] + ', humi:' + result[2];
+    console.log(raw_message);
+    message = Buffer.from(raw_message);
 
 });
 
