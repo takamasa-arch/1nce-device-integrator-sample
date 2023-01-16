@@ -16,7 +16,7 @@ import socket
 ENDPOINT = osiot_info.ENDPOINT
 CLIENT_ID = osiot_info.CLIENT_ID
 
-wait_time = 5
+wait_time = 300
 device_name = CLIENT_ID
 
 M_SIZE = 1024
