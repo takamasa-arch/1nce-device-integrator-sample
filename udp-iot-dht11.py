@@ -38,10 +38,10 @@ def device_main():
     logger.info("Connecting to %s with client ID '%s' to UDP endpoints ...", ENDPOINT, CLIENT_ID)
 
     while True:
-        now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+        # now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         temp, humi = grovepi.dht(6, 0)
 
-        payload = "TIMESTAMP:" + now + ", TEMPERATURE:" + str(temp) + ", HUMIDITY:" + str(humi)
+        payload = "TEMP:" + str(temp) + ", HUMI:" + str(humi)
         logger.debug("  payload: %s", payload)
 
         send_len = sock.sendto(payload.encode('utf-8'), serv_address)
