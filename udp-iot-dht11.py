@@ -47,11 +47,6 @@ def device_main():
         send_len = sock.sendto(payload.encode('utf-8'), serv_address)
         # ※sendtoメソッドはkeyword arguments(address=serv_addressのような形式)を受け付けないので注意
 
-        # ③Serverからのmessageを受付開始
-        print('Waiting response from Server')
-        rx_meesage, addr = sock.recvfrom(M_SIZE)
-        print(f"[Server]: {rx_meesage.decode(encoding='utf-8')}")
-
         t.sleep(wait_time)
 
 def exit_sample(msg_or_exception):
