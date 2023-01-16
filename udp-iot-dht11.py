@@ -41,7 +41,7 @@ def device_main():
         now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         temp, humi = grovepi.dht(6, 0)
 
-        payload = {"TIMESTAMP": now, "TEMPERATURE": int(temp), "HUMIDITY": int(humi)}
+        payload = "TIMESTAMP:" + now + ", TEMPERATURE:" + int(temp) + ", HUMIDITY:" + int(humi)
         logger.debug("  payload: %s", payload)
 
         send_len = sock.sendto(payload.encode('utf-8'), serv_address)
