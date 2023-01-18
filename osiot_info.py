@@ -1,4 +1,3 @@
-HOME = "/home/pi/py/python-aws-iot-sample-code/"
-ENDPOINT = "127.0.0.1"
+ENDPOINT = "udp://udp.os.1nce.com:4445"
 CLIENT_ID = "test-raspberrypi3b-01"
 
