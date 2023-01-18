@@ -15,6 +15,7 @@ import socket
 # Define ENDPOINT, CLIENT_ID, PATH_TO_CERTIFICATE, PATH_TO_PRIVATE_KEY, PATH_TO_AMAZON_ROOT_CA_1, MESSAGE, TOPIC, and RANGE
 ENDPOINT = osiot_info.ENDPOINT
 CLIENT_ID = osiot_info.CLIENT_ID
+PORT = osiot_info.PORT
 
 wait_time = 300
 device_name = CLIENT_ID
@@ -22,7 +23,7 @@ device_name = CLIENT_ID
 M_SIZE = 1024
 
 # Serverのアドレスを用意。Serverのアドレスは確認しておく必要がある。
-serv_address = (ENDPOINT, 4445)
+serv_address = (ENDPOINT, PORT)
 
 # ①ソケットを作成する
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
