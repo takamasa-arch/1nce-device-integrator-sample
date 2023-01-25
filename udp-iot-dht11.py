@@ -49,7 +49,7 @@ def device_main():
             PORT,
             payload))
 
-        send_len = sock.sendto(payload.encode('utf-8'), serv_address)
+        send_len = sock.sendto(payload, serv_address)
         # ※sendtoメソッドはkeyword arguments(address=serv_addressのような形式)を受け付けないので注意
 
         t.sleep(wait_time)
