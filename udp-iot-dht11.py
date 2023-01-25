@@ -42,8 +42,12 @@ def device_main():
         # now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         temp, humi = grovepi.dht(6, 0)
 
-        payload = "TEMP:" + str(temp) + ", HUMI:" + str(humi)
-        logger.debug("  payload: %s", payload)
+        payload = ("TEMP:" + str(temp) + ", HUMI:" + str(humi)).encode()
+        logger.info(
+            "Sending UDP message to {}:{} with body {}".format(
+            ENDPOINT,
+            PORT,
+            payload))
 
         send_len = sock.sendto(payload.encode('utf-8'), serv_address)
         # ※sendtoメソッドはkeyword arguments(address=serv_addressのような形式)を受け付けないので注意
