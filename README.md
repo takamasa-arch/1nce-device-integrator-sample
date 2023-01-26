@@ -11,7 +11,7 @@
 - Python 3.5.3
 - Raspbian For Robots (v9.13)
 
-## USAGE
+## Usage
 
 Change your environment
 ~~~python
