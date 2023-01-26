@@ -1,5 +1,4 @@
-# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: MIT-0
+#! /usr/bin
 
 import time as t
 import json
@@ -11,21 +10,18 @@ from datetime import datetime
 import grovepi
 import traceback
 import socket
+import struct
 
-# Define ENDPOINT, CLIENT_ID, PATH_TO_CERTIFICATE, PATH_TO_PRIVATE_KEY, PATH_TO_AMAZON_ROOT_CA_1, MESSAGE, TOPIC, and RANGE
 ENDPOINT = osiot_info.ENDPOINT
 CLIENT_ID = osiot_info.CLIENT_ID
 PORT = osiot_info.PORT
 
 wait_time = 300
 device_name = CLIENT_ID
+# M_SIZE = 1024
 
-M_SIZE = 1024
-
-# Serverのアドレスを用意。Serverのアドレスは確認しておく必要がある。
 serv_address = (ENDPOINT, PORT)
 
-# ①ソケットを作成する
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 logger = logging.getLogger()
@@ -39,30 +35,21 @@ def device_main():
     logger.info("Connecting to %s with client ID '%s' to UDP endpoints ...", ENDPOINT, CLIENT_ID)
 
     while True:
-        # now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
-        temp, humi = grovepi.dht(6, 0)
 
-        message = ("TEMP:" + str(temp) + ", HUMI:" + str(humi)).encode()
-        payload = memoryview(message)
+        temp, humi = grovepi.dht(6, 0)
+        payload = bytearray(struct.pack('f',temp)) + bytearray(struct.pack('f',humi))
         logger.info(
             "Sending UDP message to {}:{} with body {}".format(
             ENDPOINT,
             PORT,
-            message))
+            payload))
 
         send_len = sock.sendto(payload, serv_address)
-        # ※sendtoメソッドはkeyword arguments(address=serv_addressのような形式)を受け付けないので注意
 
         t.sleep(wait_time)
 
 def exit_sample(msg_or_exception):
-    """
-    Exit sample with cleaning
 
-    Parameters
-    ----------
-    msg_or_exception: str or Exception
-    """
     if isinstance(msg_or_exception, Exception):
         logger.error("Exiting sample due to exception.")
         traceback.print_exception(msg_or_exception.__class__, msg_or_exception, sys.exc_info()[2])
@@ -73,9 +60,7 @@ def exit_sample(msg_or_exception):
     sys.exit(0)
 
 def exit_handler(_signal, frame):
-    """
-    Exit sample
-    """
+
     exit_sample(" Key abort")
 
 if __name__ == "__main__":
