@@ -1,5 +1,16 @@
 # 1nce-device-integrator-sample
 
+## Environment
+
+### Hardware
+- Raspberry Pi 3b+
+- Grovepi+
+- DHT11
+
+### Software
+- Python 3.5.3
+- Raspbian For Robots (v9.13)
+
 ## USAGE
 
 Change your environment
