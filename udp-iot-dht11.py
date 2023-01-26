@@ -1,7 +1,4 @@
-#! /usr/bin
-
 import time as t
-import json
 import osiot_info
 import signal
 import sys
@@ -18,7 +15,6 @@ PORT = osiot_info.PORT
 
 wait_time = 300
 device_name = CLIENT_ID
-# M_SIZE = 1024
 
 serv_address = (ENDPOINT, PORT)
 
