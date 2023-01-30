@@ -13,7 +13,7 @@ ENDPOINT = osiot_info.ENDPOINT
 CLIENT_ID = osiot_info.CLIENT_ID
 PORT = osiot_info.PORT
 
-wait_time = 300
+wait_time = 600
 device_name = CLIENT_ID
 
 serv_address = (ENDPOINT, PORT)
