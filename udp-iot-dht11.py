@@ -34,7 +34,7 @@ def device_main():
 
         temp, humi = grovepi.dht(6, 0)
         
-        message = 'TEMP:' + temp + ', HUMI:' + humi
+        message = 'TEMP:' + str(temp) + ', HUMI:' + str(humi)
         now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
 
         payload = bytearray(struct.pack('f',temp)) + bytearray(struct.pack('f',humi))
