@@ -33,12 +33,17 @@ def device_main():
     while True:
 
         temp, humi = grovepi.dht(6, 0)
+        
+        message = 'TEMP:' + temp + ', HUMI:' + humi
+        now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+
         payload = bytearray(struct.pack('f',temp)) + bytearray(struct.pack('f',humi))
         logger.info(
-            "Sending UDP message to {}:{} with body {}".format(
+            "Sending UDP message to {}:{} with body {} at {}".format(
             ENDPOINT,
             PORT,
-            payload))
+            message,
+            now))
 
         send_len = sock.sendto(payload, serv_address)
 
